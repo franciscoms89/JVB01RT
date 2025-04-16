@@ -1,10 +1,7 @@
-package ejericiosResueltos;
-
 import java.util.Scanner;
 
-public class Ejercicio1 {
-
-    public void ejercicio1(){
+public class Main {
+    public static void main(String[] args) {
 
         // Punto a)
 
@@ -19,5 +16,4 @@ public class Ejercicio1 {
         System.out.println("Hola " + nombre + ", bienvenido al sistema");
 
     }
-
 }

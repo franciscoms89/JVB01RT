@@ -1,10 +1,7 @@
-package ejericiosResueltos;
-
 import java.util.Scanner;
 
-public class Ejercicio4 {
-
-    public void ejercicio4(){
+public class Main {
+    public static void main(String[] args) {
 
         Scanner scannerNum1 = new Scanner(System.in);
         System.out.println("Introduce el primer número");
@@ -16,8 +13,8 @@ public class Ejercicio4 {
 
         System.out.println("La suma de " + num1 + " y " + num2 + "es " + (num1+num2));
         System.out.println("La resta de " + num1 + " y " + num2 + "es " + (num1-num2));
-        System.out.println("La multiplicación de " + num1 + " y " + num2 + "es " + (num1*num2));
-        System.out.println("La división de " + num1 + " y " + num2 + "es " + (num1/num2));
+        System.out.println("La multiplicación de " + num1 + " y " + num2 + " es " + (num1*num2));
+        System.out.println("La división de " + num1 + " y " + num2 + " es " + (num1/num2));
 
         // Extra
 
@@ -25,5 +22,4 @@ public class Ejercicio4 {
         System.out.println("En este ejercicio podríamos crear un if para comprobar si se introduce un 0 en el segundo número y en ese caso, escribir un mensaje de que no es número válido.");
 
     }
-
 }

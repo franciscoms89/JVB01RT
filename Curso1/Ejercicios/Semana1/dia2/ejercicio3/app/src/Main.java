@@ -1,10 +1,8 @@
-package ejericiosResueltos;
-
 import java.util.Scanner;
 
-public class Ejercicio3 {
+public class Main {
 
-    public void ejercicio3(){
+    public static void main(String[] args) {
 
         Scanner scanner1 = new Scanner(System.in);
         System.out.println("Introduce la base");
@@ -17,7 +15,7 @@ public class Ejercicio3 {
         double formula = (base*altura)/2;
 
         System.out.println("El área del triángulo con las medidas que me has proporcionado es: "
-        + formula);
+                + formula);
 
     }
 }

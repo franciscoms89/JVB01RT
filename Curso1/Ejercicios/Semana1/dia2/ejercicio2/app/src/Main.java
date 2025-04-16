@@ -1,8 +1,5 @@
-package ejericiosResueltos;
-
-public class Ejercicio2 {
-
-    public void ejercicio2(){
+public class Main {
+    public static void main(String[] args) {
 
         // Punto a)
 
@@ -27,6 +24,6 @@ public class Ejercicio2 {
         System.out.println("Al asignar valores que no corresponden con el tipo de dato, genera un error en el programa.");
         System.out.println("Como asignar un entero en un dato double (con decimales) o viceversa, o un String en un boolean. ");
         System.out.println("Esto es porque Java es un lenguaje fuertemente tipado.");
-    }
 
+    }
 }
