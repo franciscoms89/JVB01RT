@@ -1,10 +1,10 @@
 public class Persona {
 
-    int id;
-    String nom;
-    int edad;
-    String direc;
-    int telf;
+    private int id;
+    private String nom;
+    private int edad;
+    private String direc;
+    private int telf;
 
     public Persona() {
     }
