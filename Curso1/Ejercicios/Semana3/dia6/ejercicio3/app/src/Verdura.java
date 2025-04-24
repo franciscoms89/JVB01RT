@@ -1,10 +1,10 @@
 public class Verdura {
 
-    int id;
-    String nombre;
-    String color;
-    int calorias;
-    boolean debeCocinarse;
+    private int id;
+    private String nombre;
+    private String color;
+    private int calorias;
+    private boolean debeCocinarse;
 
     public Verdura() {
     }

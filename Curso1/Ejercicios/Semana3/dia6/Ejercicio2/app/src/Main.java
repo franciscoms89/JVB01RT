@@ -23,7 +23,7 @@ public class Main {
 
         for(Persona p : personas){
             if(p.getEdad()>30){
-                System.out.println("Persona con más de 30 años: " + p);
+                System.out.println("Persona con más de 30 años: " + p.getNom());
             }else{
                 System.out.println();
             }
