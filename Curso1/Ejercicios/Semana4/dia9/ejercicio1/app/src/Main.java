@@ -1,9 +1,5 @@
-import interfaces.Combustion;
-import interfaces.Electrico;
-import vehiculos.Auto;
-import vehiculos.Camioneta;
-import vehiculos.Moto;
-import vehiculos.Vehiculo;
+import interfaces.*;
+import vehiculos.*;
 
 import java.util.ArrayList;
 
@@ -26,8 +22,7 @@ public class Main {
         vehiculos.add(moto2);
 
         for (Vehiculo v : vehiculos){
-            System.out.print(v.getId() + " -> " + v.getMarca() + " - " + v.getModelo());
-            System.out.print(". ");
+            System.out.print(v.getId() + " -> " + v.getMarca() + " - " + v.getModelo() + ". ");
             v.calcularAntiguedad();
 
             if(v instanceof Electrico)
