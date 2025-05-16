@@ -27,7 +27,7 @@ public class Main {
         System.out.println("Introduce un año de búsqueda:");
         int agnoBuscado = scanner.nextInt();
         List<Auto> agno2020 = buscarPor(inventario, a-> a.getAgno() == agnoBuscado);
-        System.out.println("Los autos del año 2020 son: " + agno2020.stream().toList());
+        System.out.println("Los autos del año " + agnoBuscado + " son: " + agno2020.stream().toList());
         // filtro por precio
         System.out.println("Introduce un precio a buscar");
         double precioBuscado = scanner.nextDouble();

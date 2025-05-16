@@ -23,8 +23,12 @@ public class Main {
         List<Evento> filtroEvento = eventoList.stream()
                 .filter(e -> e.getFecha().equals(fechaEspecifica))
                 .toList();
-        System.out.println("Los eventos programados para la fecha " + fechaEspecifica + " son: ");
-        filtroEvento.forEach(System.out::println);
+        if(filtroEvento.isEmpty()){
+            System.out.println("No hay eventos para la fecha " + fechaEspecifica);
+        }else {
+            System.out.println("Los eventos programados para la fecha " + fechaEspecifica + " son: ");
+            filtroEvento.forEach(System.out::println);
+        }
         System.out.println();
         // Agrupar eventos por categoría y contar
         Map<Categorias, Long> contarEventos = eventoList.stream()
@@ -37,7 +41,7 @@ public class Main {
         // Encuentra el evento más cercano
         LocalDate hoy = LocalDate.now();
         Optional<Evento> masCercano = eventoList.stream()
-                .filter(e -> !e.getFecha().isBefore(hoy))
+                .filter(e -> e.getFecha().isAfter(hoy))
                 .min(Comparator.comparing(Evento::getFecha));
         System.out.println("El evento más próximo es: ");
         masCercano.ifPresentOrElse(System.out::println,()-> System.out.println("No hay eventos"));
