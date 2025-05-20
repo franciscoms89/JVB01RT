@@ -40,4 +40,18 @@ public class Tarea {
                 '}';
     }
 
+    // meto-do agregar subtarea
+    public void addSubtarea(Tarea tarea){
+        subtareas.add(tarea);
+    }
+
+    //-------------------------------------------------
+
+    // Méto-do recursivo para imprimir la jerarquía
+    public void imprimirJerarquía(String indentacion) {
+        System.out.println(indentacion + nombre);
+        for (Tarea subtarea : subtareas) {
+            subtarea.imprimirJerarquía(indentacion + "|   ");
+        }
+    }
 }
