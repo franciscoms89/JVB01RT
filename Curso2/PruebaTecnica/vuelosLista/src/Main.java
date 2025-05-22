@@ -6,12 +6,13 @@ import java.time.Month;
 import java.util.List;
 
 public class Main {
-    // constantes
+    // definimos estas constantes, que pueden ser null
     public static final LocalDate INICIO = LocalDate.of(2025, Month.AUGUST, 1);
     public static final LocalDate FIN = LocalDate.of(2025, Month.AUGUST, 30);
-    // estas constantes puede ser null
 
     public static void main(String[] args) {
+
+        // creamos 10 vuelos
         List<Vuelo> vuelos = List.of(
                 new Vuelo(1, "IB1245", "Iberia", "Madrid", "Londres", LocalDate.of(2025, Month.JULY,1), LocalDate.of(2025, Month.JULY, 6)),
                 new Vuelo(2, "IB1536", "Iberia", "Londres", "Roma", LocalDate.of(2025, Month.JULY,10), LocalDate.of(2025, Month.JULY, 15)),
@@ -24,7 +25,9 @@ public class Main {
                 new Vuelo(9, "EM1225", "Emirates", "Madrid", "Sofia", LocalDate.of(2025, Month.NOVEMBER,20), LocalDate.of(2025, Month.NOVEMBER, 26)),
                 new Vuelo(10, "EM1540", "Emirates", "Frankfurt", "Moscu", LocalDate.of(2025, Month.DECEMBER,15), LocalDate.of(2025, Month.DECEMBER, 19))
         );
+        // creamos una istancia de Vuelo y aplicamos el filtro con la lista de vuelos y las constantes
         List<Vuelo> vuelosFiltrados = FiltroVuelos.filtrarVuelos(vuelos, INICIO, FIN);
+        // imprimimos el resultado del filtro
         vuelosFiltrados.forEach(System.out::println);
     }
 }
