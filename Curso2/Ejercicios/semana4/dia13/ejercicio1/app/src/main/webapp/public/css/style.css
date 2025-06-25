@@ -1,0 +1,109 @@
+/* General */
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f4f4f4;
+    color: #333;
+}
+
+/* Centrado de contenido */
+.center-content {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh; /* Altura completa de la ventana */
+    background-color: #f4f4f4; /* Fondo suave opcional */
+    text-align: center;
+}
+
+/* Caja de contenido con tarjeta */
+.content-box {
+    padding: 40px;
+    background-color: white;
+    border-radius: 12px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    width: 80%;
+    max-width: 600px; /* Tamaño máximo para no hacerla demasiado ancha */
+}
+
+/* Estilo de título */
+h1 {
+    color: #000000;
+    font-size: 30px;
+    text-align: center;
+    margin-top: 30px;
+}
+
+h2 {
+    font-size: 20px;
+    color: #555;
+    margin-bottom: 20px;
+}
+
+/* Estilo de la lista de opciones */
+.votacion-lista {
+    list-style-type: none;
+    padding: 0;
+    margin-bottom: 20px;
+}
+
+.votacion-lista li {
+    margin: 10px 0;
+    font-size: 18px;
+}
+
+.votacion-lista input[type="radio"] {
+    margin-right: 10px;
+    transform: scale(1.2); /* Aumenta el tamaño de los radios para que sean más visibles */
+}
+
+/* Estilo del botón */
+button {
+    padding: 12px 24px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    margin-top: 20px;
+}
+
+button:hover {
+    background-color: #0056b3;
+}
+
+/* Estilo de los botones de "Votar" y "Mostrar resultados" */
+.btn-votar {
+    margin-right: 10px;
+}
+
+.btn-resultados {
+    background-color: #28a745;
+}
+
+.btn-resultados:hover {
+    background-color: #218838;
+}
+
+/* Responsividad para pantallas pequeñas */
+@media (max-width: 600px) {
+    .content-box {
+        padding: 20px;
+    }
+
+    h1 {
+        font-size: 24px;
+    }
+
+    h2 {
+        font-size: 18px;
+    }
+
+    button {
+        width: 100%; /* Los botones ocupan el 100% del ancho en pantallas pequeñas */
+        padding: 14px;
+    }
+}
