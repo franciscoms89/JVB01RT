@@ -10,15 +10,15 @@ public interface VueloServiceInterface{
 
     ResponseEntity<List<VueloDTO>> obtenerTodosLosVuelos(); // GET
 
-    ResponseEntity<VueloDTO> buscarVuelo(int id); // GET
+    ResponseEntity<VueloDTO> buscarVuelo(Integer id); // GET
 
     ResponseEntity<VueloDTO> crearVuelo(VueloDTO vueloDTO); // POST
 
-    ResponseEntity<VueloDTO> actualizarVuelo(int id, VueloDTO vueloAActualizar); // PUT
+    ResponseEntity<VueloDTO> actualizarVuelo(Integer id, VueloDTO vueloAActualizar); // PUT
 
-    ResponseEntity<VueloDTO> modificarVuelo(int id, VueloDTO vueloAModificar); // PATCH
+    ResponseEntity<VueloDTO> modificarVuelo(Integer id, VueloDTO vueloAModificar); // PATCH
 
-    ResponseEntity<Void> eliminarVuelo(int id); // DELETE
+    ResponseEntity<Void> eliminarVuelo(Integer id); // DELETE
 
     // Mapeo de DTOs
     VueloDTO mappedToDTO(Vuelo v);

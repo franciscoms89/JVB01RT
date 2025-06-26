@@ -11,7 +11,7 @@ import java.time.LocalDate;
 public class VueloDTO {
 
     @JsonProperty("vueloId")
-    private int id;
+    private Integer id;
 
     @JsonProperty("vueloNombre")
     private String nombreVuelo;

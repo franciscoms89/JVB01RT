@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
 
 @Service
@@ -29,12 +30,23 @@ public class VueloService implements VueloServiceInterface {
 
     @Override
     public ResponseEntity<List<VueloDTO>> obtenerTodosLosVuelos() {
-        return null;
+        List<VueloDTO> listaOrdenada = this.listadoVuelos.stream()
+                .sorted(Comparator.comparing(Vuelo::getFechaSalida))
+                .map(this::mappedToDTO)
+                .toList();
+        return ResponseEntity.ok(listaOrdenada);
     }
 
     @Override
-    public ResponseEntity<VueloDTO> buscarVuelo(int id) {
-        return null;
+    public ResponseEntity<VueloDTO> buscarVuelo(Integer id) {
+        Vuelo vueloBuscado= this.listadoVuelos.stream()
+                .filter(v-> v.getId().equals(id))
+                .findFirst().orElse(null);
+        if(vueloBuscado==null){
+            return ResponseEntity.notFound().build();
+        }
+        VueloDTO vueloDTO = mappedToDTO(vueloBuscado);
+        return ResponseEntity.ok(vueloDTO);
     }
 
     @Override
@@ -43,17 +55,17 @@ public class VueloService implements VueloServiceInterface {
     }
 
     @Override
-    public ResponseEntity<VueloDTO> actualizarVuelo(int id, VueloDTO vueloAActualizar) {
+    public ResponseEntity<VueloDTO> actualizarVuelo(Integer id, VueloDTO vueloAActualizar) {
         return null;
     }
 
     @Override
-    public ResponseEntity<VueloDTO> modificarVuelo(int id, VueloDTO vueloAModificar) {
+    public ResponseEntity<VueloDTO> modificarVuelo(Integer id, VueloDTO vueloAModificar) {
         return null;
     }
 
     @Override
-    public ResponseEntity<Void> eliminarVuelo(int id) {
+    public ResponseEntity<Void> eliminarVuelo(Integer id) {
         return null;
     }
 

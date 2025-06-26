@@ -8,7 +8,7 @@ public class FechaUtil {
 
     private static final DateTimeFormatter fechaFormateada = DateTimeFormatter.ofPattern("dd-MM-yyyy");
 
-    public static String formatearFecha(String fechaAFormatear){
+    public static String formatearFecha(String fechaAFormatear) {
         try {
             LocalDate fecha = LocalDate.parse(fechaAFormatear);
             return fecha.format(fechaFormateada);

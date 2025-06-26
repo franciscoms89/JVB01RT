@@ -9,7 +9,7 @@ import java.time.LocalDate;
 @AllArgsConstructor
 public class Vuelo {
 
-    private int id;
+    private Integer id;
     private String nombreVuelo;
     private String empresa;
     private String lugarSalida;
