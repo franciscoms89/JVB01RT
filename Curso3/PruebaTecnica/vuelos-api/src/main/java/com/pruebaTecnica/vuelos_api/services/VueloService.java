@@ -39,10 +39,10 @@ public class VueloService implements VueloServiceInterface {
 
     @Override
     public ResponseEntity<VueloDTO> buscarVuelo(Integer id) {
-        Vuelo vueloBuscado= this.listadoVuelos.stream()
-                .filter(v-> v.getId().equals(id))
+        Vuelo vueloBuscado = this.listadoVuelos.stream()
+                .filter(v -> v.getId().equals(id))
                 .findFirst().orElse(null);
-        if(vueloBuscado==null){
+        if (vueloBuscado == null) {
             return ResponseEntity.notFound().build();
         }
         VueloDTO vueloDTO = mappedToDTO(vueloBuscado);
@@ -51,27 +51,96 @@ public class VueloService implements VueloServiceInterface {
 
     @Override
     public ResponseEntity<VueloDTO> crearVuelo(VueloDTO vueloDTO) {
-        return null;
+        if (vueloDTO.getNombreVuelo() == null || vueloDTO.getEmpresa() == null ||
+                vueloDTO.getLugarSalida() == null || vueloDTO.getLugarLlegada() == null ||
+                vueloDTO.getFechaSalida() == null || vueloDTO.getFechaLlegada() == null) {
+            return ResponseEntity.badRequest().build();
+        }
+
+        if (vueloDTO.getFechaSalida().isAfter(vueloDTO.getFechaLlegada())) {
+            return ResponseEntity.badRequest().build();
+        }
+
+        vueloDTO.setId(this.listadoVuelos.size() + 1);
+        Vuelo vuelo = this.mappedToObj(vueloDTO);
+        this.listadoVuelos.add(vuelo);
+
+        return ResponseEntity.ok(mappedToDTO(vuelo));
     }
 
     @Override
     public ResponseEntity<VueloDTO> actualizarVuelo(Integer id, VueloDTO vueloAActualizar) {
-        return null;
+        Vuelo vueloExistente = this.listadoVuelos.stream()
+                .filter(v -> v.getId().equals(id))
+                .findFirst()
+                .orElse(null);
+
+        if (vueloExistente == null) {
+            return ResponseEntity.notFound().build();
+        }
+        if (vueloAActualizar.getNombreVuelo() == null || vueloAActualizar.getEmpresa() == null ||
+                vueloAActualizar.getLugarSalida() == null || vueloAActualizar.getLugarLlegada() == null ||
+                vueloAActualizar.getFechaSalida() == null || vueloAActualizar.getFechaLlegada() == null) {
+            return ResponseEntity.badRequest().build();
+        }
+        if (vueloAActualizar.getFechaSalida().isAfter(vueloAActualizar.getFechaLlegada())) {
+            return ResponseEntity.badRequest().build();
+        }
+
+        vueloAActualizar.setId(id);
+        Vuelo vueloActualizado = mappedToObj(vueloAActualizar);
+
+        this.listadoVuelos.removeIf(v -> v.getId().equals(id));
+        this.listadoVuelos.add(vueloActualizado);
+
+        return ResponseEntity.ok(mappedToDTO(vueloActualizado));
     }
 
     @Override
     public ResponseEntity<VueloDTO> modificarVuelo(Integer id, VueloDTO vueloAModificar) {
-        return null;
+        Vuelo vueloExistente = this.listadoVuelos.stream()
+                .filter(v -> v.getId().equals(id))
+                .findFirst()
+                .orElse(null);
+
+        if (vueloExistente == null) {
+            return ResponseEntity.notFound().build();
+        }
+
+        if (vueloAModificar.getNombreVuelo() != null) {
+            vueloExistente.setNombreVuelo(vueloAModificar.getNombreVuelo());
+        }
+        if (vueloAModificar.getEmpresa() != null) {
+            vueloExistente.setEmpresa(vueloAModificar.getEmpresa());
+        }
+        if (vueloAModificar.getLugarSalida() != null) {
+            vueloExistente.setLugarSalida(vueloAModificar.getLugarSalida());
+        }
+        if (vueloAModificar.getLugarLlegada() != null) {
+            vueloExistente.setLugarLlegada(vueloAModificar.getLugarLlegada());
+        }
+        if (vueloAModificar.getFechaSalida() != null) {
+            vueloExistente.setFechaSalida(vueloAModificar.getFechaSalida());
+        }
+        if (vueloAModificar.getFechaLlegada() != null) {
+            vueloExistente.setFechaLlegada(vueloAModificar.getFechaLlegada());
+        }
+
+        return ResponseEntity.ok(mappedToDTO(vueloExistente));
     }
+
 
     @Override
     public ResponseEntity<Void> eliminarVuelo(Integer id) {
-        return null;
+        boolean estaEliminado = this.listadoVuelos.removeIf(v -> v.getId().equals(id));
+        if (estaEliminado) {
+            return ResponseEntity.accepted().build();
+        } else {
+            return ResponseEntity.notFound().build();
+        }
     }
 
-
     // TODO: =================================== métodos de mapeo DTO ===================================
-
 
     @Override
     public VueloDTO mappedToDTO(Vuelo v) {
