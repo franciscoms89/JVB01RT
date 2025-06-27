@@ -6,12 +6,12 @@ import java.time.format.DateTimeParseException;
 
 public class FechaUtil {
 
-    private static final DateTimeFormatter fechaFormateada = DateTimeFormatter.ofPattern("dd-MM-yyyy");
+    private static final DateTimeFormatter FORMATO_FECHA = DateTimeFormatter.ofPattern("dd-MM-yyyy");
 
     public static String formatearFecha(String fechaAFormatear) {
         try {
             LocalDate fecha = LocalDate.parse(fechaAFormatear);
-            return fecha.format(fechaFormateada);
+            return fecha.format(FORMATO_FECHA);
         } catch (DateTimeParseException e) {
             return null;
         }

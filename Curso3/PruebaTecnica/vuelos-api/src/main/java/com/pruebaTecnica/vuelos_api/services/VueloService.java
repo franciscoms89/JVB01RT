@@ -38,10 +38,23 @@ public class VueloService implements VueloServiceInterface {
     }
 
     @Override
+    public ResponseEntity<List<VueloDTO>> filtrarVuelos(String empresa, String lugarLlegada, LocalDate fechaSalida) {
+        List<VueloDTO> listaFiltrada = this.listadoVuelos.stream()
+                .filter(v-> empresa == null || v.getEmpresa().equalsIgnoreCase(empresa))
+                .filter(v -> lugarLlegada == null || v.getLugarLlegada().equalsIgnoreCase(lugarLlegada))
+                .filter(v -> fechaSalida == null || v.getFechaSalida().isEqual(fechaSalida))
+                .sorted(Comparator.comparing(Vuelo::getLugarSalida))
+                .map(this::mappedToDTO)
+                .toList();
+        return ResponseEntity.ok(listaFiltrada);
+    }
+
+    @Override
     public ResponseEntity<VueloDTO> buscarVuelo(Integer id) {
         Vuelo vueloBuscado = this.listadoVuelos.stream()
                 .filter(v -> v.getId().equals(id))
-                .findFirst().orElse(null);
+                .findFirst()
+                .orElse(null);
         if (vueloBuscado == null) {
             return ResponseEntity.notFound().build();
         }
@@ -129,7 +142,6 @@ public class VueloService implements VueloServiceInterface {
         return ResponseEntity.ok(mappedToDTO(vueloExistente));
     }
 
-
     @Override
     public ResponseEntity<Void> eliminarVuelo(Integer id) {
         boolean estaEliminado = this.listadoVuelos.removeIf(v -> v.getId().equals(id));
@@ -144,11 +156,27 @@ public class VueloService implements VueloServiceInterface {
 
     @Override
     public VueloDTO mappedToDTO(Vuelo v) {
-        return new VueloDTO(v.getId(), v.getNombreVuelo(), v.getEmpresa(), v.getLugarSalida(), v.getLugarLlegada(), v.getFechaSalida(), v.getFechaLlegada());
+        return new VueloDTO(
+                v.getId(),
+                v.getNombreVuelo(),
+                v.getEmpresa(),
+                v.getLugarSalida(),
+                v.getLugarLlegada(),
+                v.getFechaSalida(),
+                v.getFechaLlegada()
+        );
     }
 
     @Override
     public Vuelo mappedToObj(VueloDTO v) {
-        return new Vuelo(v.getId(), v.getNombreVuelo(), v.getEmpresa(), v.getLugarSalida(), v.getLugarLlegada(), v.getFechaSalida(), v.getFechaLlegada());
+        return new Vuelo(
+                v.getId(),
+                v.getNombreVuelo(),
+                v.getEmpresa(),
+                v.getLugarSalida(),
+                v.getLugarLlegada(),
+                v.getFechaSalida(),
+                v.getFechaLlegada()
+        );
     }
 }

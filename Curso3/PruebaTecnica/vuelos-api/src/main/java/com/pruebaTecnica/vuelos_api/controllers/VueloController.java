@@ -5,6 +5,7 @@ import com.pruebaTecnica.vuelos_api.services.VueloServiceInterface;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.time.LocalDate;
 import java.util.List;
 
 @RestController
@@ -23,8 +24,16 @@ public class VueloController {
         return serviceInterface.obtenerTodosLosVuelos();
     }
 
+    // http://localhost:8080/vuelos/buscar-por
+    @GetMapping("/buscar-por")
+    public ResponseEntity<List<VueloDTO>> filtrarVuelos(@RequestParam(required = false) String empresa,
+                                                        @RequestParam(required = false) String lugarLlegada,
+                                                        @RequestParam(required = false) LocalDate fechaSalida) {
+        return serviceInterface.filtrarVuelos(empresa, lugarLlegada, fechaSalida);
+    }
+
     // http://localhost:8080/vuelos/id      en id poner el id que quieres buscar
-    @GetMapping("/{id}")
+    @GetMapping("/{id:\\d+}")
     public ResponseEntity<VueloDTO> buscarVuelo(@PathVariable Integer id) {
         return serviceInterface.buscarVuelo(id);
     }
@@ -45,13 +54,13 @@ public class VueloController {
     // http://localhost:8080/vuelos/id      en id poner el id que quieres buscar
     @PatchMapping("/{id}")
     public ResponseEntity<VueloDTO> modificarVuelo(@PathVariable Integer id,
-                                                   @RequestBody VueloDTO vueloAModificar){
+                                                   @RequestBody VueloDTO vueloAModificar) {
         return serviceInterface.modificarVuelo(id, vueloAModificar);
     }
 
     // http://localhost:8080/vuelos/id      en id poner el id que quieres buscar
     @DeleteMapping("/{id}")
-    public ResponseEntity<Void> eliminarVuelo(@PathVariable Integer id){
+    public ResponseEntity<Void> eliminarVuelo(@PathVariable Integer id) {
         return serviceInterface.eliminarVuelo(id);
     }
 }

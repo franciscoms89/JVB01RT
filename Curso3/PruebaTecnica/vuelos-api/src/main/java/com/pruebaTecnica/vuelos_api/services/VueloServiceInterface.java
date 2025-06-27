@@ -4,6 +4,7 @@ import com.pruebaTecnica.vuelos_api.dtos.VueloDTO;
 import com.pruebaTecnica.vuelos_api.models.Vuelo;
 import org.springframework.http.ResponseEntity;
 
+import java.time.LocalDate;
 import java.util.List;
 
 public interface VueloServiceInterface{
@@ -11,6 +12,8 @@ public interface VueloServiceInterface{
     ResponseEntity<List<VueloDTO>> obtenerTodosLosVuelos(); // GET
 
     ResponseEntity<VueloDTO> buscarVuelo(Integer id); // GET
+
+    ResponseEntity<List<VueloDTO>> filtrarVuelos(String empresa, String lugarLlegada, LocalDate fechaSalida);
 
     ResponseEntity<VueloDTO> crearVuelo(VueloDTO vueloDTO); // POST
 
@@ -25,4 +28,5 @@ public interface VueloServiceInterface{
 
     // Mapeo de OBJETO
     Vuelo mappedToObj(VueloDTO v);
+
 }
