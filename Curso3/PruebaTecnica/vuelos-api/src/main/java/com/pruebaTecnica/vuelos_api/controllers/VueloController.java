@@ -1,6 +1,7 @@
 package com.pruebaTecnica.vuelos_api.controllers;
 
 import com.pruebaTecnica.vuelos_api.dtos.VueloDTO;
+import com.pruebaTecnica.vuelos_api.models.VueloResponse;
 import com.pruebaTecnica.vuelos_api.services.VueloServiceInterface;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -18,49 +19,44 @@ public class VueloController {
         this.serviceInterface = serviceInterface;
     }
 
-    // http://localhost:8080/vuelos
+    // http://localhost:8080/vuelos/        - GET
     @GetMapping()
-    public ResponseEntity<List<VueloDTO>> obtenerTodosLosVuelos() {
-        return serviceInterface.obtenerTodosLosVuelos();
-    }
-
-    // http://localhost:8080/vuelos/buscar-por
-    @GetMapping("/buscar-por")
     public ResponseEntity<List<VueloDTO>> filtrarVuelos(@RequestParam(required = false) String empresa,
                                                         @RequestParam(required = false) String lugarLlegada,
-                                                        @RequestParam(required = false) LocalDate fechaSalida) {
-        return serviceInterface.filtrarVuelos(empresa, lugarLlegada, fechaSalida);
+                                                        @RequestParam(required = false) LocalDate fechaSalida,
+                                                        @RequestParam(required = false) String ordenarPor) {
+        return serviceInterface.filtrarVuelos(empresa, lugarLlegada, fechaSalida, ordenarPor);
     }
 
-    // http://localhost:8080/vuelos/id      en id poner el id que quieres buscar
-    @GetMapping("/{id:\\d+}")
+    // http://localhost:8080/vuelos/id      - GET
+    @GetMapping("/{id}")
     public ResponseEntity<VueloDTO> buscarVuelo(@PathVariable Integer id) {
         return serviceInterface.buscarVuelo(id);
     }
 
-    // http://localhost:8080/vuelos
+    // http://localhost:8080/vuelos         -POST
     @PostMapping()
-    public ResponseEntity<VueloDTO> crearVuelo(@RequestBody VueloDTO vueloDTO) {
+    public ResponseEntity<VueloResponse> crearVuelo(@RequestBody VueloDTO vueloDTO) {
         return serviceInterface.crearVuelo(vueloDTO);
     }
 
-    // http://localhost:8080/vuelos/id      en id poner el id que quieres buscar
+    // http://localhost:8080/vuelos/id      - PUT
     @PutMapping("/{id}")
-    public ResponseEntity<VueloDTO> actualizarVuelo(@PathVariable Integer id,
+    public ResponseEntity<VueloResponse> actualizarVuelo(@PathVariable Integer id,
                                                     @RequestBody VueloDTO vueloAActualizar) {
         return serviceInterface.actualizarVuelo(id, vueloAActualizar);
     }
 
-    // http://localhost:8080/vuelos/id      en id poner el id que quieres buscar
+    // http://localhost:8080/vuelos/id      - PATCH
     @PatchMapping("/{id}")
-    public ResponseEntity<VueloDTO> modificarVuelo(@PathVariable Integer id,
+    public ResponseEntity<VueloResponse> modificarVuelo(@PathVariable Integer id,
                                                    @RequestBody VueloDTO vueloAModificar) {
         return serviceInterface.modificarVuelo(id, vueloAModificar);
     }
 
-    // http://localhost:8080/vuelos/id      en id poner el id que quieres buscar
+    // http://localhost:8080/vuelos/id      - DELETE
     @DeleteMapping("/{id}")
-    public ResponseEntity<Void> eliminarVuelo(@PathVariable Integer id) {
+    public ResponseEntity<VueloResponse> eliminarVuelo(@PathVariable Integer id) {
         return serviceInterface.eliminarVuelo(id);
     }
 }

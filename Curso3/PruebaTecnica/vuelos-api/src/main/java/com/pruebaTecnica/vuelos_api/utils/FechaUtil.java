@@ -1,19 +1,11 @@
 package com.pruebaTecnica.vuelos_api.utils;
 
 import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
-import java.time.format.DateTimeParseException;
+import java.time.temporal.ChronoUnit;
 
 public class FechaUtil {
 
-    private static final DateTimeFormatter FORMATO_FECHA = DateTimeFormatter.ofPattern("dd-MM-yyyy");
-
-    public static String formatearFecha(String fechaAFormatear) {
-        try {
-            LocalDate fecha = LocalDate.parse(fechaAFormatear);
-            return fecha.format(FORMATO_FECHA);
-        } catch (DateTimeParseException e) {
-            return null;
-        }
+    public static long calcularDuracionDias(LocalDate fechaSalida, LocalDate fechaLlegada){
+        return ChronoUnit.DAYS.between(fechaSalida, fechaLlegada);
     }
 }

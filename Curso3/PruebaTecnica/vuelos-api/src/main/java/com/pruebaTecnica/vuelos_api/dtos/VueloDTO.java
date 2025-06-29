@@ -31,4 +31,7 @@ public class VueloDTO {
     @JsonProperty("vueloFechaLlegada")
     private LocalDate fechaLlegada;
 
+    @JsonProperty("vueloDuracionDias")
+    private long duracionDias;
+
 }
