@@ -1,0 +1,203 @@
+{
+	"info": {
+		"_postman_id": "45449fbd-c2f1-4fd0-9729-be7b111dd818",
+		"name": "Vuelo API",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "45847594",
+		"_collection_link": "https://franciscomorcillo.postman.co/workspace/Francisco-Morcillo's-Workspace~5543257b-eccb-4838-8c0a-fd1b4635d2b3/collection/45847594-45449fbd-c2f1-4fd0-9729-be7b111dd818?action=share&source=collection_link&creator=45847594"
+	},
+	"item": [
+		{
+			"name": "Buscar un vuelo por Id",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/vuelos/4",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"vuelos",
+						"4"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Buscar vuelos (permite filtros)",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/vuelos?empresa=iberia",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"vuelos"
+					],
+					"query": [
+						{
+							"key": "empresa",
+							"value": "iberia"
+						},
+						{
+							"key": "lugarLlegada",
+							"value": "Madrid",
+							"disabled": true
+						},
+						{
+							"key": "fechaSalida",
+							"value": "2025-07-10",
+							"disabled": true
+						},
+						{
+							"key": "ordenarPor",
+							"value": "empresa",
+							"disabled": true
+						},
+						{
+							"key": "ordenarPor",
+							"value": "lugarLlegada",
+							"disabled": true
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Crear un vuelo",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"vueloNombre\": \"FM1234\",\r\n    \"vueloEmpresa\": \"FRANCISCO\",\r\n    \"vueloLugarSalida\": \"Madrid\",\r\n    \"vueloLugarLlegada\": \"Don Benito\",\r\n    \"vueloFechaSalida\": \"2025-12-18\",\r\n    \"vueloFechaLlegada\": \"2025-12-23\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/vuelos",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"vuelos"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Modificar vuelo completo",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"vueloNombre\": \"AZ1291\",\r\n    \"vueloEmpresa\": \"ALITALIA\",\r\n    \"vueloLugarSalida\": \"Roma\",\r\n    \"vueloLugarLlegada\": \"Atenas\",\r\n    \"vueloFechaSalida\": \"2027-07-15\",\r\n    \"vueloFechaLlegada\": \"2027-07-15\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/vuelos/7",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"vuelos",
+						"7"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Actualizar parcialmente un vuelo",
+			"request": {
+				"method": "PATCH",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"vueloNombre\": \"ALI1291\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/vuelos/9",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"vuelos",
+						"9"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Borrar un vuelo",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/vuelos/9",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"vuelos",
+						"9"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

@@ -13,11 +13,14 @@ import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
 
+// Servicio que implementa la lógica de negocio para la gestión de vuelos. Incluye operaciones CRUD y filtrado con ordenación.
+
 @Service
 public class VueloService implements VueloServiceInterface {
 
     private final List<Vuelo> listadoVuelos = new ArrayList<>();
 
+    // Constructor que inicializa la lista con 10 vuelos predefinidos
     public VueloService() {
         listadoVuelos.add(new Vuelo(1, "IB1245", "IBERIA", "Madrid", "Barcelona", LocalDate.of(2025, 10, 5), LocalDate.of(2025, 10, 5)));
         listadoVuelos.add(new Vuelo(2, "TK3409", "TURKISH", "Estambul", "Madrid", LocalDate.of(2025, 10, 5), LocalDate.of(2025, 10, 5)));
@@ -31,6 +34,7 @@ public class VueloService implements VueloServiceInterface {
         listadoVuelos.add(new Vuelo(10, "LH9900", "LUFTHANSA", "Berlín", "Roma", LocalDate.of(2025, 7, 10), LocalDate.of(2025, 7, 10)));
     }
 
+    // Función para filtrar vuelos
     @Override
     public ResponseEntity<List<VueloDTO>> filtrarVuelos(String empresa, String lugarLlegada, LocalDate fechaSalida, String ordenarPor) {
 
@@ -51,6 +55,7 @@ public class VueloService implements VueloServiceInterface {
         return ResponseEntity.ok(listaFiltrada);
     }
 
+    // Función para buscar vuelo por id
     @Override
     public ResponseEntity<VueloDTO> buscarVuelo(Integer id) {
         Vuelo vueloBuscado = buscarVueloPorId(id);
@@ -61,6 +66,7 @@ public class VueloService implements VueloServiceInterface {
         return ResponseEntity.ok(vueloDTO);
     }
 
+    // Función para crear un vuelo
     @Override
     public ResponseEntity<VueloResponse> crearVuelo(VueloDTO vueloDTO) {
         if (!esValido(vueloDTO)) {
@@ -80,6 +86,7 @@ public class VueloService implements VueloServiceInterface {
                 LocalDateTime.now()));
     }
 
+    // Función para actualizar un vuelo completamente
     @Override
     public ResponseEntity<VueloResponse> actualizarVuelo(Integer id, VueloDTO vueloAActualizar) {
         Vuelo vueloExistente = buscarVueloPorId(id);
@@ -108,6 +115,7 @@ public class VueloService implements VueloServiceInterface {
                         LocalDateTime.now()));
     }
 
+    // Función para modificar un vuelo parcialmente
     @Override
     public ResponseEntity<VueloResponse> modificarVuelo(Integer id, VueloDTO vueloAModificar) {
         Vuelo vueloExistente = buscarVueloPorId(id);
@@ -132,8 +140,7 @@ public class VueloService implements VueloServiceInterface {
         if (vueloAModificar.getNombreVuelo() != null) vueloExistente.setNombreVuelo(vueloAModificar.getNombreVuelo());
         if (vueloAModificar.getEmpresa() != null) vueloExistente.setEmpresa(vueloAModificar.getEmpresa());
         if (vueloAModificar.getLugarSalida() != null) vueloExistente.setLugarSalida(vueloAModificar.getLugarSalida());
-        if (vueloAModificar.getLugarLlegada() != null)
-            vueloExistente.setLugarLlegada(vueloAModificar.getLugarLlegada());
+        if (vueloAModificar.getLugarLlegada() != null) vueloExistente.setLugarLlegada(vueloAModificar.getLugarLlegada());
         if (vueloAModificar.getFechaSalida() != null) vueloExistente.setFechaSalida(vueloAModificar.getFechaSalida());
         if (vueloAModificar.getFechaLlegada() != null)
             vueloExistente.setFechaLlegada(vueloAModificar.getFechaLlegada());
@@ -145,6 +152,7 @@ public class VueloService implements VueloServiceInterface {
                         LocalDateTime.now()));
     }
 
+    // Función para eliminar un vuelo
     @Override
     public ResponseEntity<VueloResponse> eliminarVuelo(Integer id) {
         boolean estaEliminado = this.listadoVuelos.removeIf(v -> v.getId().equals(id));
@@ -163,7 +171,7 @@ public class VueloService implements VueloServiceInterface {
         }
     }
 
-    // TODO: =================================== métodos auxiliares ====================================
+    // =================================== métodos auxiliares ====================================
 
     private Vuelo buscarVueloPorId(Integer id) {
         return this.listadoVuelos.stream()
@@ -182,7 +190,7 @@ public class VueloService implements VueloServiceInterface {
                 !dto.getFechaSalida().isAfter(dto.getFechaLlegada());
     }
 
-    // TODO: =================================== métodos de mapeo DTO ===================================
+    // =================================== métodos de mapeo DTO ===================================
 
     @Override
     public VueloDTO mappedToDTO(Vuelo v) {
