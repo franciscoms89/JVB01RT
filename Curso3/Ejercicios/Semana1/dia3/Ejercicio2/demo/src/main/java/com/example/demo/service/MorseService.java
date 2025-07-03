@@ -6,9 +6,9 @@ import java.util.HashMap;
 import java.util.Map;
 
 @Service
-public class MorseService implements MorseServiceInterface{
+public class MorseService implements MorseServiceInterface {
 
-    private static Map<Character,String> morse = new HashMap<>();
+    private static Map<Character, String> morse = new HashMap<>();
 
     static {
         morse.put('A', "· -");
@@ -52,6 +52,21 @@ public class MorseService implements MorseServiceInterface{
 
     @Override
     public String palabraAMorse(String palabra) {
-        return "";
+        if (palabra == null || palabra.isBlank()) {
+            throw new IllegalArgumentException("La palabra no puede estar vacía");
+        }
+
+        StringBuilder resultado = new StringBuilder();
+
+        for (char c : palabra.toUpperCase().toCharArray()) {
+            if (!morse.containsKey(c)) {
+                throw new IllegalArgumentException("Carácter inválido: '" + c + "'. Solo se permiten letras y números.");
+            }
+            String codigo = morse.get(c);
+            if (codigo != null) {
+                resultado.append(codigo).append(" ");
+            }
+        }
+        return resultado.toString().trim();
     }
 }
